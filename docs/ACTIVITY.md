@@ -1,6 +1,7 @@
 # Smart Cache Layer — Activity Submission
 
 **Team:** _Joseph Boussamba, Angel Kibui, Lydivine Umutesi, Erick Kanja_
+**Team Participation Task sheet:** _[Joseph Boussamba, Angel Kibui, Lydivine Umutesi, Erick Kanja](https://docs.google.com/spreadsheets/d/1SRQx7vBHtfFNu0qXp3XI4FxSLcxLQLM0TGdpj8Hr2ds/edit?usp=sharing)_
 
 ---
 
