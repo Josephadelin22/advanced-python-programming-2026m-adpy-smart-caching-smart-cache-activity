@@ -88,18 +88,12 @@ class PostDetailView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, post_id: int):
-        # ---------------------------------------------------------------
-        # TODO (Level 2): Implement cache-aside for a single post.
-        #
-        # Requirements:
-        #   - Cache key: must be unique per post (include the post_id)
-        #   - TTL: 600 seconds (10 minutes)
-        #   - Return 404 if the post does not exist
-        #
-        # Think: why is a longer TTL acceptable here vs the list endpoint?
-        # ---------------------------------------------------------------
+        cache_key = f"posts:details:{post_id}"
 
-        # REMOVE these lines once you implement the cache below
+        #1. Check cache
+        cashed_post = cache.get(cache_key)
+        if cached_post is not None:
+            return Response(cached_post)
         try:
             post = Post.objects.select_related("author").get(
                 id=post_id, status=Post.STATUS_PUBLISHED
@@ -108,6 +102,8 @@ class PostDetailView(APIView):
             return Response({"detail": "Not found."}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = PostSerializer(post)
+
+        cache.set(cache_key, serializer.data, timeout=CACHE_TTL_POST_DETAIL)
         return Response(serializer.data)
 
 
