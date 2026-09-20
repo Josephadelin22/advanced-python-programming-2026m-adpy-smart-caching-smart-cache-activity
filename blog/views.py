@@ -11,7 +11,7 @@
 #  Run the timing script first (docs/ACTIVITY.md → Level 1) to see
 #  how slow the uncached responses are before you begin.
 # =============================================================================
-
+from django.core.cache import cache
 import time
 import logging
 
